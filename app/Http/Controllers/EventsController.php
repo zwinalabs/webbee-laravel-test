@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Repositories\Event\EventInterface;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -11,6 +12,20 @@ use Illuminate\Support\Facades\Date;
 
 class EventsController extends BaseController
 {
+
+    /**
+     * @var EventInterface
+     */
+    private $eventRepository;
+    /**
+     * EventController constructor.
+     * @param EventInterface $eventRepository
+     */
+    public function __construct(EventInterface $eventRepository){
+        $this->eventRepository = $eventRepository;
+    }
+
+
     public function getWarmupEvents() {
         return Event::all();
     }
@@ -101,7 +116,8 @@ class EventsController extends BaseController
      */
 
     public function getEventsWithWorkshops() {
-        throw new \Exception('implement in coding task 1');
+        $events = $this->eventRepository->getAll();
+        return $events;
     }
 
 
