@@ -5,9 +5,30 @@ namespace App\Http\Controllers;
 
 use App\Models\MenuItem;
 use Illuminate\Routing\Controller as BaseController;
+use App\Repositories\MenuItem\MenuItemInterface;
+
 
 class MenuController extends BaseController
 {
+
+
+    /**
+     * @var MenuItemInterface
+     */
+    private $menuItemRepository;
+    /**
+     * EventController constructor.
+     * @param MenuItemInterface $menuItemRepository
+     */
+    public function __construct(MenuItemInterface $menuItemRepository){
+        $this->menuItemRepository = $menuItemRepository;
+    }
+
+
+    public function getWarmupEvents() {
+        return Event::all();
+    }
+
     /*
     Requirements:
     - the eloquent expressions should result in EXACTLY one SQL query no matter the nesting level or the amount of menu items.
@@ -95,6 +116,8 @@ class MenuController extends BaseController
      */
 
     public function getMenuItems() {
-        throw new \Exception('implement in coding task 3');
+        //throw new \Exception('implement in coding task 3');
+        $menuItems = $this->menuItemRepository->getAll();
+        return $menuItems;
     }
 }
