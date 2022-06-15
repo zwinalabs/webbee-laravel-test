@@ -17,7 +17,7 @@ class MenuController extends BaseController
      */
     private $menuItemRepository;
     /**
-     * EventController constructor.
+     * MenuController constructor.
      * @param MenuItemInterface $menuItemRepository
      */
     public function __construct(MenuItemInterface $menuItemRepository){
